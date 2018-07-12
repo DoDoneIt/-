@@ -26,11 +26,11 @@ master和slave、sentinel先后启动，启动时候加载不同的配置即可
 
 3、启动sentinel：redis-server redis-3.0.5/sentinel.conf –sentinel
 
-![image](https://raw.githubusercontent.com/DoDoneIt/Develop-blog-img/master/redis-slave-4.png)
+![image](https://raw.githubusercontent.com/DoDoneIt/Develop-blog-img/master/sent启动.png)
 
 4、进入当前master可以查看主从信息：info Replication
 
-![image](https://raw.githubusercontent.com/DoDoneIt/Develop-blog-img/master/redis-slave-5.png)
+![image](https://raw.githubusercontent.com/DoDoneIt/Develop-blog-img/master/redis-slave-4.png)
 
 ##### 客户端感知故障迁移
 
