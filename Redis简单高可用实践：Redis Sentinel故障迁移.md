@@ -12,21 +12,33 @@ $ make&&make install
 
 为了模拟主从，我们新建目录作为slave，复制一份redis.conf进去，并且更改文件中的port端口为6378和slaveof值
 
+![image](https://raw.githubusercontent.com/DoDoneIt/Develop-blog-img/master/redis-slave-1.png)
+
 master和slave、sentinel先后启动，启动时候加载不同的配置即可
 
 1、启动master：redis-server  redis-3.0.5/redis.conf
 
+![image](https://raw.githubusercontent.com/DoDoneIt/Develop-blog-img/master/redis-slave-2.png)
+
 2、启动slave：redis-server redis-slave/redis.conf
+
+![image](https://raw.githubusercontent.com/DoDoneIt/Develop-blog-img/master/redis-slave-3.png)
 
 3、启动sentinel：redis-server redis-3.0.5/sentinel.conf –sentinel
 
+![image](https://raw.githubusercontent.com/DoDoneIt/Develop-blog-img/master/redis-slave-4.png)
+
 4、进入当前master可以查看主从信息：info Replication
+
+![image](https://raw.githubusercontent.com/DoDoneIt/Develop-blog-img/master/redis-slave-5.png)
 
 ##### 客户端感知故障迁移
 
 ###### 一、客户端主动获取
 
 redis官方提供了php库[PSredis](https://github.com/jamescauwelier/PSRedis)，功能还是比较强大的，实现了多Sentinel 监控，其原理也比较简单：客户端连接Sentinel实例，通过Sentinel提供的命令来获取master：SENTINEL get-master-addr-by-name <master>
+
+![image](https://raw.githubusercontent.com/DoDoneIt/Develop-blog-img/master/redis-slave-6.png)
 
 ###### 二、Sentinel推送客户端
 
@@ -77,8 +89,12 @@ echo $log >> /var/redis/redisinfo.log
 
 需要注意的是，shell脚本需要给可执行权限，不然sentinel启动会报错：
 
+![image](https://raw.githubusercontent.com/DoDoneIt/Develop-blog-img/master/redis-slave-7.png)
+
 ##### 结语：
 master如果被下线后再次上线加入集群，那么sentinel会把该实例做为slave而不是master，当然也可以强制恢复之前的master-slave关系；sentinel做迁移的过程中会rewrite各个实例的配置文件。
+
+![image](https://raw.githubusercontent.com/DoDoneIt/Develop-blog-img/master/redis-slave-8.png)
 
 redis sentinel内部实现原理和故障迁移原理还有许多知识要学，比如它是怎么实现的监控，怎么做出下线判断，多sentinel之间怎么联系，故障迁移的过程等等。。
 
