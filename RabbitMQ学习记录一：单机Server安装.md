@@ -19,17 +19,17 @@ MQ安装很简单，在[官网](https://www.rabbitmq.com/download.html)上有各
 	![image](https://raw.githubusercontent.com/DoDoneIt/Develop-blog-img/master/20161202155049.png)
 <center>CMD工具</center>
 </div>
-
 <div align=center>
 ![image](https://raw.githubusercontent.com/DoDoneIt/Develop-blog-img/master/20161202154410.png)
-
 <center>Management  UI</center>
+</div>
 
 Management  UI 默认是使用15672端口，默认用户名guest和密码guest，为了安全，guest账号只能通过http://localhost:15672/登录，可供操作的资源也被限制。
 Management 方便管理MQ。比如查看客户端连接情况，可以查看消息推送消费的速率，磁盘写入和读取速率，新增QUEUE，设置Durability，查看/添加MESSAGES，添加Exchange，绑定Routing key和Queue.....
 对于出现的每个名称，Management都给出了解释，建议细看：
+<div align=center>
 ![image](https://raw.githubusercontent.com/DoDoneIt/Develop-blog-img/master/20161227113113.png)
-
 <center>Management  UI 注释功能</center>
+</div>
 
 如果初识MQ，这种单机版的Server就行了。
