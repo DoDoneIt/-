@@ -15,10 +15,12 @@ MQ安装很简单，在[官网](https://www.rabbitmq.com/download.html)上有各
 
 安装包括一个Server和一个Management UI 后台。Windows 的 Server 提供了一个RabbitMQ Command 工具，这个CMD工具很好用。
 
-![image](https://raw.githubusercontent.com/DoDoneIt/Develop-blog-img/master/20161202155049.png)
-
+<div align=center>
+	![image](https://raw.githubusercontent.com/DoDoneIt/Develop-blog-img/master/20161202155049.png)
 <center>CMD工具</center>
+</div>
 
+<div align=center>
 ![image](https://raw.githubusercontent.com/DoDoneIt/Develop-blog-img/master/20161202154410.png)
 
 <center>Management  UI</center>
