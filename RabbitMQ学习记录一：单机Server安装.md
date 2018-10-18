@@ -3,13 +3,19 @@
 一个典型的电商系统，对外有：PC网站、M站、APP、微信，对内可能会有：CMS、营销、CRM、订单、产品、供应商等。
 
 对于复杂的系统，我们一般通过：消息队列、RPC、发布/订阅各种模型来解决系统间的解耦和数据通信。对于这些，最常用的一种开源消息中间件就是：RabbitMQ：
+
 ```
-RabbitMQ是使用Erlang语言开发的开源消息队列系统，基于AMQP协议来实现。AMQP的主要特征是面向消息、队列、路由（包括点对点和发布/订阅）、可靠性、安全。AMQP协议更多用在企业系统内，对数据一致性、稳定性和可靠性要求很高的场景，对性能和吞吐量的要求还在其次。-阿里中间件技术博客]
+
+RabbitMQ是使用Erlang语言开发的开源消息队列系统，基于AMQP协议来实现。
+
+AMQP的主要特征是面向消息、队列、路由（包括点对点和发布/订阅）、可靠性、安全。AMQP协议更多用在企业系统内，对数据一致性、稳定性和可靠性要求很高的场景，对性能和吞吐量的要求还在其次。-阿里中间件技术博客]
+
 ```
 
 ####MQ的安装
 
-MQ安装很简单，在[https://www.rabbitmq.com/download.html](https://www.rabbitmq.com/download.html)官网上有各个系统的安装教程，而Windows下载安装包后直接安装。以下的介绍均在Windows环境。
+
+MQ安装很简单，在[官网](https://www.rabbitmq.com/download.html)上有各个系统的安装教程，而Windows下载安装包后直接安装。以下的介绍均在Windows环境。
 
 安装包括一个Server和一个Management UI 后台。Windows 的 Server 提供了一个RabbitMQ Command 工具，这个CMD工具很好用。
 
