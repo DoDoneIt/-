@@ -10,27 +10,21 @@
 composer.json文件写上：
 
 ```php
-
 {
-  &quot;require&quot;:{
-     &quot;php-amqplib/php-amqplib&quot;:&quot;2.5.*&quot;
+  "require":{
+     "php-amqplib/php-amqplib":"2.5.*"
 }
-
 ```
 
 然后cmd命令行中cd切换到目标目录，输入：
 
 ```php
-
 $ composer.phar install
-
 ```
-
 
 官网上也给出了代码例子，生产者send.php的代码：
 
-[php]
-
+```php
 //引入类
 require_once __DIR__ . '/vendor/autoload.php';
 use PhpAmqpLib\Connection\AMQPStreamConnection;
@@ -57,9 +51,9 @@ $channel = $connection-&gt;channel();
 /**
  * 指定一个队列$queue，同名队列如果声明多次但只会创建一次
  */
-$channel-&gt;queue_declare($queue = 'test', false, false, false, false);
+$channel->queue_declare($queue = 'test', false, false, false, false);
 
-$info = array(&quot;time&quot;=&gt;time() ,&quot;name&quot;=&gt;&quot;demo&quot;);
+$info = array("time"=>time() ,"name"=>"demo");
 $msg_str = json_encode($info);
 
 /**
@@ -71,16 +65,16 @@ $msg = new AMQPMessage($msg_str);
  * 向队列中发送一条消息，声明exchange，默认类型是direct并绑定route_key，怎么操作见下文截图
  * exchange和route_key也是AMQP协议中的重要概念
  */
-$channel-&gt;basic_publish($msg,$exchange='exchange_demo',$route_key='test_route_key');
+$channel->basic_publish($msg,$exchange='exchange_demo',$route_key='test_route_key');
 
-echo $msg_str.&quot;\n&quot;; 
+echo $msg_str."\n"; 
 
 /* 
  *闭管道和连接 
  */ 
-$channel-&gt;close(); 
-$connection-&gt;close(); 
-[/php]
+$channel->close(); 
+$connection->close(); 
+```
 
 消费者reveive.php 代码：
 
