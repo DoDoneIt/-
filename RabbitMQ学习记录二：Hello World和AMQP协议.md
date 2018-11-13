@@ -91,48 +91,48 @@ $connection = new AMQPStreamConnection('localhost', 5672, 'guest', 'guest','/');
 /*
  * 创建直接处理的管道
  */
-$channel = $connection-&gt;channel();
+$channel = $connection->channel();
 
 /*
  * 声明消费者队列,和发布者的队列名一样
  * 为了防止先启动消费者，当下文调用basic_consume方法时，如果MQ服务器上未声明过队列，就会抛出IO异常
  */
 $queue = 'test';
-$channel-&gt;queue_declare($queue, false, false, false, false);
+$channel->queue_declare($queue, false, false, false, false);
 
-echo ' [*] Waiting for messages. To exit press CTRL+C', &quot;\n&quot;;
+echo ' [*] Waiting for messages. To exit press CTRL+C';
 
 /*
  * 指定从哪队列取消息，有消息就交个callback函数处理
  */
-$channel-&gt;basic_consume($queue, '', false, true, false, false, $callback);
+$channel->basic_consume($queue, '', false, true, false, false, $callback);
 
 $callback = function($msg) {
-    echo &quot; [x] Received &quot;, $msg-&gt;body, &quot;\n&quot;;
+    echo "[x] Received ". $msg->body;
 };
 
 /*
  * 监听队列中的消息,如果没有消息，就处于阻塞状态
  */
-while(count($channel-&gt;callbacks)) {
-    $channel-&gt;wait();
+while(count($channel->callbacks)) {
+    $channel->wait();
 }
 
-$channel-&gt;close();
-$connection-&gt;close();
+$channel->close();
+$connection->close();
 
 ```
 
 生产者和消费者代码写好后，cli方式运行，如下图：
 <div align="center">
-    <img width="300" src="https://raw.githubusercontent.com/DoDoneIt/Develop-blog-img/master/12151.png"/>
+    <img width="500" src="https://raw.githubusercontent.com/DoDoneIt/Develop-blog-img/master/12151.png"/>
 </div>
 成功运行后，我们进入Management后台，可以查看各项运行数据。
 
 在send.php 中我们用了默认账号和密码，在后台中我们可以新增用户名、密码以及区分赋予vhost操作权限：
 
 <div align="center">
-    <img width="300" src="https://raw.githubusercontent.com/DoDoneIt/Develop-blog-img/master/3242.png"/>
+    <img width="500" src="https://raw.githubusercontent.com/DoDoneIt/Develop-blog-img/master/3242.png"/>
 </div>
 所以connection那段，可以写成：
 
@@ -148,10 +148,10 @@ $connection = new AMQPStreamConnection(
 
 在send.php 中我们也特殊指定了exchange和route_key，在代码运行之前，我们需要手动创建exchange并绑定route_key。
 <div align="center">
-    <img width="300" src="https://raw.githubusercontent.com/DoDoneIt/Develop-blog-img/master/exchange.png"/>
+    <img width="500" src="https://raw.githubusercontent.com/DoDoneIt/Develop-blog-img/master/exchange.png"/>
 </div>
 <div align=center><center>(1、在vhost下创建exchange)</center></div>
 <div align="center">
-    <img width="300" src="https://raw.githubusercontent.com/DoDoneIt/Develop-blog-img/master/route_key.png"/>
+    <img width="500" src="https://raw.githubusercontent.com/DoDoneIt/Develop-blog-img/master/route_key.png"/>
 </div>
 <div align=center><center>(2、在exchange里面绑定route_key)</center></div>
