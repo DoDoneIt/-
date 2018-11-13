@@ -46,7 +46,7 @@ $connection = new AMQPStreamConnection(
  * 创建管道，通过管道我们和MQ Server直接打交道,大部分的业务操作是在Channel这个接口中完成。
  * 包括定义Queue、定义Exchange、绑定Queue与Exchange、发布消息等
  */
-$channel = $connection-&gt;channel();
+$channel = $connection->channel();
 
 /**
  * 指定一个队列$queue，同名队列如果声明多次但只会创建一次
@@ -124,9 +124,11 @@ $connection->close();
 ```
 
 生产者和消费者代码写好后，cli方式运行，如下图：
+
 <div align="center">
     <img width="500" src="https://raw.githubusercontent.com/DoDoneIt/Develop-blog-img/master/12151.png"/>
 </div>
+
 成功运行后，我们进入Management后台，可以查看各项运行数据。
 
 在send.php 中我们用了默认账号和密码，在后台中我们可以新增用户名、密码以及区分赋予vhost操作权限：
@@ -134,6 +136,7 @@ $connection->close();
 <div align="center">
     <img width="500" src="https://raw.githubusercontent.com/DoDoneIt/Develop-blog-img/master/3242.png"/>
 </div>
+
 所以connection那段，可以写成：
 
 ```php
@@ -147,10 +150,12 @@ $connection = new AMQPStreamConnection(
 ```
 
 在send.php 中我们也特殊指定了exchange和route_key，在代码运行之前，我们需要手动创建exchange并绑定route_key。
+
 <div align="center">
     <img width="500" src="https://raw.githubusercontent.com/DoDoneIt/Develop-blog-img/master/exchange.png"/>
 </div>
 <div align=center><center>(1、在vhost下创建exchange)</center></div>
+
 <div align="center">
     <img width="500" src="https://raw.githubusercontent.com/DoDoneIt/Develop-blog-img/master/route_key.png"/>
 </div>

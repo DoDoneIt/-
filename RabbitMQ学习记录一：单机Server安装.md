@@ -17,6 +17,7 @@ MQ安装很简单，在[官网](https://www.rabbitmq.com/download.html)上有各
 
 <div align="center"><img width="300" src="https://raw.githubusercontent.com/DoDoneIt/Develop-blog-img/master/20161202155049.png"/></div>
 <div align=center><center>CMD工具</center></div>
+
 <div align="center"><img width="300" src="https://raw.githubusercontent.com/DoDoneIt/Develop-blog-img/master/20161202154410.png"/></div>
 <div align=center><center>Management  UI</center></div>
 
