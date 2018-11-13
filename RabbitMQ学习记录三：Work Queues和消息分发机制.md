@@ -2,7 +2,7 @@
 
 任务队列的应用场景往往是把耗时的同步操作放到后台异步执行，比如：短信发送，邮件通知，状态推送等等。。官网上给出了一个Work Queues教程来模拟耗时任务消息的发送和接收处理。
 
-[任务发送(生产者)](https://github.com/rabbitmq/rabbitmq-tutorials/blob/master/php/new_task.php">new_task.php)
+[任务发送(生产者)](https://github.com/rabbitmq/rabbitmq-tutorials/blob/master/php/new_task.php)new_task.php
 
 ```php
 
@@ -70,7 +70,7 @@ $channel->basic_consume($queue_name, '', false, $no_ack=false, false, false, $ca
 RabbitMq遵循的原理是：在默认情况下，RabbitMQ将逐个发送消息到在序列中的下一个消费者(而不考虑每个任务的时长等等，且是提前一次性分配，并非一个一个分配)。平均每个消费者获得相同数量的消息。这种方式分发消息机制称为Round-Robin（轮询），像顺序投食一样。
 
 <div align="center">
-    <img width="500" src="https://raw.githubusercontent.com/DoDoneIt/Develop-blog-img/master/work-1.png"/>
+    <img width="500" src="https://raw.githubusercontent.com/DoDoneIt/Develop-blog-img/master/work-1-1.png"/>
 </div>
 
 #### 公平分发Fair
@@ -118,7 +118,7 @@ $callback = function($msg){
 ```
 
 <div align="center">
-    <img width="500" src="https://raw.githubusercontent.com/DoDoneIt/Develop-blog-img/master/05706.png"/>
+    <img width="500" src="https://raw.githubusercontent.com/DoDoneIt/Develop-blog-img/master/05706-1.png"/>
 </div>
 
 
