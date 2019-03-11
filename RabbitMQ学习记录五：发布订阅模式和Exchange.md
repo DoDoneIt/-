@@ -45,7 +45,7 @@ $channel->basic_publish($msg,$exchange='',$route_key='hello');
 
 但是在fanout类型中，一个生产者会有多个消费者，所有MQ在连接的时候会创建随机的临时队列，名称就像：amq.gen-JzTY20BRgKO-HjmUJj0wLg。
 
-#### [Bindings]
+#### Bindings
 
 <div align="center">
 	<img  src="http://www.rabbitmq.com/img/tutorials/bindings.png" width="322" height="91" />
@@ -94,6 +94,14 @@ $connection->close();
 
 ```php
 
+$connection = new AMQPStreamConnection('localhost', 5672, 'guest', 'guest');
+$channel = $connection->channel();
+$channel->exchange_declare('logs', 'fanout', false, false, false);
+//创建临时队列
+list($queue_name, ,) = $channel->queue_declare("", false, false, true, false);
+//临时队列绑定到logs的exchange上
+$channel->queue_bind($queue_name, 'logs');
+echo " [*] Waiting for logs. To exit press CTRL+C\n";
 //消费者1:屏幕打印消息
 $callback = function($msg){
     echo  $msg>body;
@@ -111,7 +119,10 @@ $callback = function($msg){
 
 ```
 
->“生产者声明了一个广播模式的转换器，订阅这个转换器的消费者都可以收到每一条消息。可以看到在生产者中，没有声明队列。这也验证了之前说的。生产者其实只关心exchange，至于exchange会把消息转发给哪些队列，并不是生产者关心的。2个消费者，一个打印日志，一个写入文件，除了这2个地方不一样，其他地方一模一样。也是声明一下广播模式的转换器，而队列则是随机生成的，消费者实例启动后，会创建一个随机实例”</blockquote>
+>生产者声明了一个广播fanout模式的转换器，订阅这个转换器的消费者都可以收到每一条消息。可以看到在生产者中，没有声明队列。这也验证了之前说的。生产者其实只关心exchange，至于exchange会把消息转发给哪些队列，并不是生产者关心的。2个消费者，一个打印日志，一个写入文件，除了这2个地方不一样，其他地方一模一样。也是声明一下广播模式的转换器，而队列则是随机生成的，消费者实例启动后，会创建一个随机实例 
+
+
+下图也可以看出，exchange为fanout模式下，2个消费者消费的时候创建了2个临时的随机queue name。
 
 <div align="center">
     <img width="500" src="https://raw.githubusercontent.com/DoDoneIt/Develop-blog-img/master/DingTalk20170227105112.png"/>
